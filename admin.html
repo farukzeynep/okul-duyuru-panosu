@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Okul Duyuru Panosu - Yönetici Paneli</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .admin-container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .admin-panel {
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+        
+        .admin-form {
+            display: grid;
+            grid-gap: 15px;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        label {
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        
+        input, textarea, select {
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        
+        button {
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        
+        button:hover {
+            background-color: #003d7e;
+        }
+        
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        
+        th, td {
+            padding: 10px;
+            border: 1px solid #ddd;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+        }
+        
+        .edit-btn {
+            background-color: #28a745;
+        }
+        
+        .delete-btn {
+            background-color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <header>
+            <div class="logo-container">
+                <h1>ATATÜRK İLKOKULU</h1>
+                <p>YÖNETİCİ PANELİ</p>
+            </div>
+        </header>
+
+        <main>
+            <section class="admin-panel">
+                <h2>Duyuru Ekle/Düzenle</h2>
+                <form class="admin-form">
+                    <div class="form-group">
+                        <label for="announcement-title">Duyuru Başlığı</label>
+                        <input type="text" id="announcement-title" name="title" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="announcement-content">Duyuru İçeriği</label>
+                        <textarea id="announcement-content" name="content" rows="5" required></textarea>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="announcement-date">Yayın Tarihi</label>
+                        <input type="date" id="announcement-date" name="date" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="announcement-expiry">Son Geçerlilik Tarihi (İsteğe Bağlı)</label>
+                        <input type="date" id="announcement-expiry" name="expiry">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="announcement-category">Kategori</label>
+                        <select id="announcement-category" name="category">
+                            <option value="general">Genel</option>
+                            <option value="academic">Akademik</option>
+                            <option value="event">Etkinlik</option>
+                            <option value="urgent">Acil</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>
+                            <input type="checkbox" id="announcement-important" name="important">
+                            Önemli Duyuru (Vurgulanacak)
+                        </label>
+                    </div>
+                    
+                    <div class="button-group">
+                        <button type="submit" id="save-announcement">Kaydet</button>
+                        <button type="reset" id="clear-form">Temizle</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="admin-panel">
+                <h2>Mevcut Duyurular</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Başlık</th>
+                            <th>Tarih</th>
+                            <th>Kategori</th>
+                            <th>Durum</th>
+                            <th>İşlemler</th>
+                        </tr>
+                    </thead>
+                    <tbody id="announcements-table">
+                        <tr>
+                            <td>DuyuruTV kanalımız yayına girmiştir.</td>
+                            <td>18.04.2025</td>
+                            <td>Genel</td>
+                            <td>Aktif</td>
+                            <td class="action-buttons">
+                                <button class="edit-btn">Düzenle</button>
+                                <button class="delete-btn">Sil</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Hafta sonu gezisi iptal olmuştur.</td>
+                            <td>17.04.2025</td>
+                            <td>Acil</td>
+                            <td>Aktif</td>
+                            <td class="action-buttons">
+                                <button class="edit-btn">Düzenle</button>
+                                <button class="delete-btn">Sil</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Okul aile birliği toplantısı</td>
+                            <td>16.04.2025</td>
+                            <td>Etkinlik</td>
+                            <td>Aktif</td>
+                            <td class="action-buttons">
+                                <button class="edit-btn">Düzenle</button>
+                                <button class="delete-btn">Sil</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+
+            <section class="admin-panel">
+                <h2>Öne Çıkan Bilgiler</h2>
+                <form class="admin-form">
+                    <div class="form-group">
+                        <label for="important-date">Belirli Gün ve Haftalar</label>
+                        <input type="text" id="important-date-title" placeholder="Başlık" required>
+                        <input type="text" id="important-date-range" placeholder="Tarih Aralığı (Örn: 21.04.2025 - 27.04.2025)" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="quote-text">Günün Sözü</label>
+                        <textarea id="quote-text" rows="2" placeholder="Söz metni"></textarea>
+                        <input type="text" id="quote-author" placeholder="Söz sahibi">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="birthday-name">Doğum Günü</label>
+                        <input type="text" id="birthday-name" placeholder="Öğrenci Adı">
+                        <input type="text" id="birthday-class" placeholder="Sınıfı">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="today-history">Tarihte Bugün</label>
+                        <textarea id="today-history" rows="4" placeholder="Her satıra bir tarihte bugün bilgisi ekleyin"></textarea>
+                    </div>
+                    
+                    <button type="submit" id="save-featured">Bilgileri Güncelle</button>
+                </form>
+            </section>
+
+            <section class="admin-panel">
+                <h2>Sistem Ayarları</h2>
+                <form class="admin-form">
+                    <div class="form-group">
+                        <label for="school-name">Okul Adı</label>
+                        <input type="text" id="school-name" value="ATATÜRK İLKOKULU">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="report-card-date">Karne Günü Tarihi</label>
+                        <input type="date" id="report-card-date" value="2025-06-09">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Konum (Hava Durumu İçin)</label>
+                        <input type="text" id="location" value="ANKARA">
+                    </div>
+                    
+                    <button type="submit" id="save-settings">Ayarları Kaydet</button>
+                </form>
+            </section>
+        </main>
+
+        <footer>
+            <p>© 2025 - Okul Duyuru Panosu Yönetim Sistemi</p>
+            <a href="index.html" target="_blank">Ana Sayfayı Görüntüle</a>
+        </footer>
+    </div>
+
+    <script>
+        // Admin paneli işlemleri için basit JavaScript kodları
+        document.addEventListener('DOMContentLoaded', function() {
+            // Duyuru formu işlemleri
+            const announcementForm = document.querySelector('.admin-form');
+            
+            announcementForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Burada formdan gelen verilerle duyuru ekleme/güncelleme işlemleri yapılır
+                // Gerçek bir uygulamada bu veriler backend'e gönderilir
+                alert('Duyuru kaydedildi! (Demo amaçlı uyarı)');
+            });
+            
+            // Düzenleme düğmelerine tıklama olayları
+            const editButtons = document.querySelectorAll('.edit-btn');
+            editButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const title = row.cells[0].textContent;
+                    
+                    // Örnek: Formu doldur
+                    document.getElementById('announcement-title').value = title;
+                    // Diğer form alanları da doldurulabilir
+                    
+                    alert(`"${title}" duyurusu düzenleme için yüklendi`);
+                });
+            });
+            
+            // Silme düğmelerine tıklama olayları
+            const deleteButtons = document.querySelectorAll('.delete-btn');
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const row = this.closest('tr');
+                    const title = row.cells[0].textContent;
+                    
+                    if (confirm(`"${title}" duyurusunu silmek istediğinizden emin misiniz?`)) {
+                        // Silme işlemi - gerçek uygulamada backend'e istek gönderilir
+                        row.remove();
+                        alert('Duyuru silindi!');
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
